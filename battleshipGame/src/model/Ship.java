@@ -31,12 +31,13 @@ public class Ship {
 
 	public String wasShot(String stringGuess)    
 	{        
-
 		String result = "miss";          
 		int index = locationCells.indexOf(stringGuess);
-		if (index>= 0){                              
+		if (index>= 0)
+		{                              
 			locationCells.remove(index);
-			if(locationCells.isEmpty()){              
+			if(locationCells.isEmpty())
+			{              
 				result = "sink";
 				System.out.println("You sunk the enemy's " + name + " ");
 			}

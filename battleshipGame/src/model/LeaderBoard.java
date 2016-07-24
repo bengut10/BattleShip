@@ -6,20 +6,21 @@ import java.util.ArrayList;
 public class LeaderBoard implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	ArrayList <Record> arrayList = new ArrayList <Record>();
+	private ArrayList <Game> scoreList = null;
 	
-	public LeaderBoard(){
-		
+	public LeaderBoard()
+	{
+		scoreList =  new ArrayList <Game>();
 	}
 	
-	public void displayLeaderBoard()
+	public ArrayList<Game> displayLeaderBoard()
 	{
-		
+		return this.scoreList;
 	}
 	
-	public void storeScore()
+	public void storeScore(Game game)
 	{
-		
+		scoreList.add(game);
 	}
 	
 	public void findScore()

@@ -7,6 +7,11 @@ public class SingleGame extends Game
 	private ArrayList <Ship> listOfShips = new ArrayList<Ship>();   
 	private GameHelper helper = new GameHelper();  	
 	
+	public SingleGame(String name)
+	{
+		super(name);
+	}
+	
 
 	@Override
 	public void StartGame() 
@@ -35,17 +40,23 @@ public class SingleGame extends Game
 		for(Ship ship : listOfShips)
 		{
 			result = ship.wasShot(userGuess);		
-			if(result.equalsIgnoreCase("hit")){
+			if(result.equalsIgnoreCase("hit"))
+			{
 				return true;
 			}
 			if(result.equalsIgnoreCase("sink"))  
 			{
 				listOfShips.remove(ship);
+				if(listOfShips.isEmpty())
+				{
+					System.out.println("43343");
+					endGame();
+				}
 				return true;
 			}
 		}
+		missedShot();
+		System.out.println(getScore());
 		return false;
 	}
 }
-
-	

@@ -39,6 +39,8 @@ public class GameScreen{
 			if (gc.performOperation("compare cordinate")){
 					cell.changeStatus(true);
 				}
+			else
+				cell.changeStatus(false);
 		});
 		layout.setCenter(vbox);
 		Scene scene = new Scene(layout, 1000, 1000);

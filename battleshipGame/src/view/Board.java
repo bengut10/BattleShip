@@ -18,13 +18,10 @@ public class Board extends Parent
 	Board(){
 	}
 	
-	
 	public VBox createBoard(EventHandler<? super MouseEvent> handler)
 	{
-		
 		String alpha = "abcdefghij";
 		StringCharacterIterator itr =  new StringCharacterIterator(alpha);
-		
 		char current;
 		current = itr.current();
 		
@@ -49,8 +46,6 @@ public class Board extends Parent
 		}
 		
 		getChildren().add(rows);
-		
 		return rows;
 	}
-	
 }
