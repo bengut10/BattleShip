@@ -1,31 +1,77 @@
 package model;
 
-import java.io.Serializable;
-import java.util.ArrayList;
+
+import java.io.*;
+import java.util.*;
+
+
 
 public class LeaderBoard implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private ArrayList <Game> scoreList = null;
+	ArrayList <Game> list = null;
 	
 	public LeaderBoard()
 	{
-		scoreList =  new ArrayList <Game>();
+		this.list = readFromFile(); 
 	}
+	
 	
 	public ArrayList<Game> displayLeaderBoard()
 	{
-		return this.scoreList;
+		return this.list;
 	}
 	
 	public void storeScore(Game game)
 	{
-		scoreList.add(game);
+		this.list.add(game);
+		writeToFile(this.list);
 	}
 	
-	public void findScore()
-	{
-		
-	}
+    @SuppressWarnings("unchecked")
+	private static ArrayList <Game> readFromFile()
+    {
+        ArrayList <Game> list = new ArrayList <Game> ();
+        try
+        {
+            FileInputStream fis = new FileInputStream("inventory.dat");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            list = (ArrayList <Game> ) ois.readObject();
+            ois.close();
+            fis.close();
+        }
+        catch(FileNotFoundException FNF)
+        {
+        	return list;
+        }
+        catch(IOException ioe)
+        {
+            ioe.printStackTrace(); 
+            return null;
+        }
+        catch(ClassNotFoundException c)
+        {
+            System.out.println("Class not found");
+            c.printStackTrace();
+            return null;
+        }
+        return list;
+    }
+    private static void writeToFile(ArrayList <Game> list)
+    {
+        try
+        {
+            FileOutputStream fos= new FileOutputStream("inventory.dat");
+	        ObjectOutputStream oos= new ObjectOutputStream(fos);
+	        oos.writeObject(list);
+	        oos.close();
+	        fos.close();
+        }
+        catch(IOException ioe)
+        { 
+        	ioe.printStackTrace();
+        }
+    }
+
 
 }

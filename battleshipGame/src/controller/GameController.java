@@ -2,6 +2,12 @@ package controller;
 
 import view.GameScreen;
 import model.SingleGame;
+
+import java.util.ArrayList;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import model.LeaderBoard;
 import view.ViewHandler;
 
 
@@ -9,10 +15,11 @@ public class GameController
 {
 	GameScreen gs;
 	SingleGame sg;
+	LeaderBoard lb;
+	ViewHandler vh;
 	
 	
 	public GameController(){}
-	
 	
 	public boolean performOperation(String operation) 
 	{	
@@ -46,6 +53,16 @@ public class GameController
 				return false;
 			}
 		}
+		
+		else if(operation == "get me the leaderboard")
+		{
+			lb = new LeaderBoard();
+			vh = new ViewHandler();	
+			
+			ArrayList <Object> leaderb = (ArrayList) lb.displayLeaderBoard();
+			ViewHandler.leaderboard = FXCollections.observableList(leaderb);
+
+		}	
 		return true;
 	}
 }

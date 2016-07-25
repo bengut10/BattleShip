@@ -1,8 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GameHelper {
+public class GameHelper implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private static final String alphabet = "abcdefghij";
 	private int gridLength = 10;
 	private int gridSize = 100;

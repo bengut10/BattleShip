@@ -1,9 +1,12 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SingleGame extends Game
+public class SingleGame extends Game implements Serializable
 {
+	
+	private static final long serialVersionUID = 1L;
 	private ArrayList <Ship> listOfShips = new ArrayList<Ship>();   
 	private GameHelper helper = new GameHelper();  	
 	

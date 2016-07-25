@@ -1,15 +1,23 @@
 package view;
+
+import controller.GameController;
 import javafx.stage.*;
+import model.Game;
 import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
-import controller.GameController;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.*;
 
 
 public class ViewHandler 
 {
 	public static String userName;
+	public static ObservableList<Object> leaderboard;
+
+	
 	public static void playSingle(String title) 
 	{
 		Stage window = new Stage();
@@ -44,5 +52,35 @@ public class ViewHandler
 		window.setScene(scene);
 		window.showAndWait();
 	}
-  
+	public static void displayLeaderBoard() 
+	{
+		Stage window = new Stage();
+		//Block events to other windows
+		window.initModality(Modality.APPLICATION_MODAL);
+		window.setTitle("Leader Board");
+		window.setMinWidth(250);
+		GameController gc = new GameController();
+		gc.performOperation("get me the leaderboard");
+		
+		TableColumn <Object, String> nameColumn = new TableColumn<> ("Name");
+		nameColumn.setMinWidth(200);
+		nameColumn.setCellValueFactory(new PropertyValueFactory <> ("playerName"));
+		
+		TableColumn <Object, Integer> scoreColumn = new TableColumn<> ("Score");
+		scoreColumn.setMinWidth(200);
+		scoreColumn.setCellValueFactory(new PropertyValueFactory <> ("score"));
+		
+
+		TableView <Object> table = new TableView<>();
+		table.setItems(leaderboard);
+		table.getColumns().add(nameColumn);
+		table.getColumns().add(scoreColumn);
+		VBox vbox = new VBox();
+		vbox.getChildren().add(table);
+		Scene scene = new Scene(vbox);
+		window.setScene(scene);
+		window.show();
+			
+	}
+
 }

@@ -1,10 +1,13 @@
 package model;
 
-public abstract class Game 
-{	
+import java.io.Serializable;
+
+public abstract class Game implements Serializable
+{
+	private static final long serialVersionUID = 1L;
 	private int score;
 	private String playerName;
-	private LeaderBoard lb;
+	
 	
 	public Game(){
 		
@@ -12,7 +15,7 @@ public abstract class Game
 	
 	public Game(String playerName)
 	{
-		this.playerName = playerName;
+		this.setPlayerName(playerName);
 		score = 1000;
 	}
 
@@ -30,7 +33,16 @@ public abstract class Game
 	
 	public void endGame()
 	{
+		LeaderBoard lb = new LeaderBoard();
 		lb = new LeaderBoard();
 		lb.storeScore(this);
+	}
+
+	public String getPlayerName() {
+		return playerName;
+	}
+
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
 	}
 }

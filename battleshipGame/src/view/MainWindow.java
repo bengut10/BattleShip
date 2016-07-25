@@ -17,6 +17,7 @@ public class MainWindow extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
+		
 		window = primaryStage;
 		window.setOnCloseRequest(e ->
 		{
@@ -53,12 +54,16 @@ public class MainWindow extends Application{
 		/*-------------------------------------------------- */
 		button2.setOnAction(e-> 
 		{
+			
 		
 		});
 		/*-------------------------------------------------- */
 		button3.setOnAction(e-> 
 		{
-		
+			if (e.getSource() == button3)
+			{
+				ViewHandler.displayLeaderBoard();
+			}
 			
 		});
 		
