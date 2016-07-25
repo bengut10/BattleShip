@@ -2,12 +2,10 @@ package view;
 
 import controller.GameController;
 import javafx.stage.*;
-import model.Game;
 import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.*;
 
@@ -70,7 +68,6 @@ public class ViewHandler
 		scoreColumn.setMinWidth(200);
 		scoreColumn.setCellValueFactory(new PropertyValueFactory <> ("score"));
 		
-
 		TableView <Object> table = new TableView<>();
 		table.setItems(leaderboard);
 		table.getColumns().add(nameColumn);

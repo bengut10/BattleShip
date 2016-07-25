@@ -5,9 +5,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Cell extends Rectangle {
-    private int x, y;
+    @SuppressWarnings("unused")
+	private int x, y;
     private String cordinate;
-    private Board board;
+    @SuppressWarnings("unused")
+	private Board board;
 
     public Cell(String cordinate,int x, int y, Board board) 
     {

@@ -1,14 +1,13 @@
 package view;
 
 public class Chat {
-	public void Chat()
+	
+	public Chat()
 	{
-		
 	}
 
 	public void createChat()
 	{
-		
 	}
 	
 }

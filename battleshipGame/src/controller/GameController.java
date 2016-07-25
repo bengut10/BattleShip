@@ -2,11 +2,8 @@ package controller;
 
 import view.GameScreen;
 import model.SingleGame;
-
 import java.util.ArrayList;
-
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import model.LeaderBoard;
 import view.ViewHandler;
 
@@ -17,7 +14,6 @@ public class GameController
 	SingleGame sg;
 	LeaderBoard lb;
 	ViewHandler vh;
-	
 	
 	public GameController(){}
 	
