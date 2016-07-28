@@ -4,6 +4,7 @@ import controller.GameController;
 import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.ObservableList;
@@ -78,6 +79,25 @@ public class ViewHandler
 		window.setScene(scene);
 		window.show();
 			
+	}
+	
+	public static void displayWinning()
+	{
+		Stage window = new Stage();
+		//Block events to other windows
+		window.initModality(Modality.APPLICATION_MODAL);
+		window.setTitle("Game over");
+		window.setMinWidth(250);
+		
+		Text tb = new Text("Game Over: All ships have been destroyed");
+		
+		VBox vbox = new VBox();
+		vbox.getChildren().add(tb);
+		Scene scene = new Scene(vbox);
+		window.setScene(scene);
+		window.show();
+		
+		
 	}
 
 }

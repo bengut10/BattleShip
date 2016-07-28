@@ -1,15 +1,41 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Ship {
+public class Ship implements Serializable {
 	
+
+	private static final long serialVersionUID = 1L;
 	private ArrayList<String> locationCells;  
 	private String name;
 	private int shipSize;
 	private String shipMessage;
 	
 	Ship(){}
+	
+	
+	public String getShipMessage() {
+		return shipMessage;
+	}
+
+	public void setShipMessage(String shipMessage) {
+		this.shipMessage = shipMessage;
+	}
+	public String getSipMessage(){
+		return this.shipMessage;
+	}
+	public String getName(){
+		return this.name;
+	}
+	
+	public int getShipSize() {
+		return shipSize;
+	}
+	
+	public void setShipSize(int shipSize) {
+		this.shipSize = shipSize;
+	}
 	
 	public Ship(int shipSize, String name)         
 	{
@@ -24,19 +50,10 @@ public class Ship {
 	public ArrayList<String> getLocationCells(){
 		return this.locationCells;
 	}
-	
-	public int getShipSize() {
-		return shipSize;
-	}
-	
-	public void setShipSize(int shipSize) {
-		this.shipSize = shipSize;
-	}
 
-	public String wasShot(String stringGuess)    
+	public String shipWasShot(String stringGuess)    
 	{        
 		String result = "miss";    
-		String temp = "";
 		int index = locationCells.indexOf(stringGuess);
 		if (index>= 0)
 		{                              
@@ -56,19 +73,5 @@ public class Ship {
 			}
 		}
 		return result;       
-	}
-
-	public String getShipMessage() {
-		return shipMessage;
-	}
-
-	public void setShipMessage(String shipMessage) {
-		this.shipMessage = shipMessage;
-	}
-	public String getSipMessage(){
-		return this.shipMessage;
-	}
-	public String getName(){
-		return this.name;
 	}
 }

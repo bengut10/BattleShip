@@ -93,8 +93,8 @@ public class GameServer {
 			
 		}
 		
-	  public static void main(String args[]) 
-	  {  new GameServer();  }
+	 // public static void main(String args[]) 
+	 // {  new GameServer();  }
 
 
 }

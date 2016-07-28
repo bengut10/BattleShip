@@ -1,7 +1,6 @@
 package model;
 
 import java.net.*;
-import java.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GameHelper implements Serializable {
+public class Grid implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private static final String alphabet = "abcdefghij";
@@ -12,7 +12,7 @@ public class GameHelper implements Serializable {
 	private int [] grid = new int [gridSize];
 	private int shipCount = 0;
 	
-	public ArrayList<String> placeShip(int shipSize) 
+	public ArrayList<String> placeShipsOnGrid(int shipSize) 
 	{
 		ArrayList<String> alphaCells = new ArrayList<String>();     // holds alpha numeric coordinates such as c7
 		String[] alphacoords = new String[shipSize];            

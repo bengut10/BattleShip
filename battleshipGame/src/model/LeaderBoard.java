@@ -4,8 +4,6 @@ package model;
 import java.io.*;
 import java.util.*;
 
-
-
 public class LeaderBoard implements Serializable{
 
 	private static final long serialVersionUID = 1L;

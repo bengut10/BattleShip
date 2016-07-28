@@ -1,13 +1,13 @@
 package model;
 
 import java.io.Serializable;
+import controller.GameController;
 
 public abstract class Game implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	private int score;
 	private String playerName;
-	
 	
 	public Game(){
 		
@@ -33,9 +33,13 @@ public abstract class Game implements Serializable
 	
 	public void endGame()
 	{
+		
 		LeaderBoard lb = new LeaderBoard();
 		lb = new LeaderBoard();
 		lb.storeScore(this);
+		GameController gc = new GameController();
+		gc.performOperation("Notify view of changes");
+		
 	}
 
 	public String getPlayerName() {
