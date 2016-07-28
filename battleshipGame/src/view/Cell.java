@@ -10,14 +10,16 @@ public class Cell extends Rectangle {
     private String cordinate;
     @SuppressWarnings("unused")
 	private Board board;
+    private Boolean used = false;
 
     public Cell(String cordinate,int x, int y, Board board) 
     {
-        super(30, 30);
+        super(34, 34);
         this.x = x;
         this.y = y;
         this.board = board;
-        setFill(Color.LIGHTGRAY);
+        setFill(Color.BLUE);
+        setOpacity(.6);
         setStroke(Color.BLACK);
         this.cordinate = cordinate;
     }
@@ -25,14 +27,34 @@ public class Cell extends Rectangle {
 	public void changeStatus(boolean wasHit) {
 		if(wasHit){
 			setFill(Color.RED);
+			this.setUsed(true);
+			
 		}
-		else
-			setFill(Color.BLACK);
+		else{
+			setFill(Color.WHITE);
+			this.setUsed(true);
+			
+		}
 	}
 	
 	public String getCellCordinate()
 	{
 		return cordinate;
 	}
+	
+	public void setCellCordinate(String cord){
+		this.cordinate = cord;
+	}
+
+	public Boolean getUsed() {
+		return used;
+	}
+
+	public void setUsed(Boolean used) {
+		this.used = used;
+	}
+	
+	
+	
 }
 
