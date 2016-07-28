@@ -15,7 +15,7 @@ public class GameHelper implements Serializable {
 	public ArrayList<String> placeShip(int shipSize) 
 	{
 		ArrayList<String> alphaCells = new ArrayList<String>();     // holds alpha numeric coordinates such as c7
-		//String[] alphacoords = new String[shipSize];            
+		String[] alphacoords = new String[shipSize];            
 		String temp = null;                                        //temp concat variable
 		int [] coordinates  = new int [shipSize];                  //current possible coordinates 
 		int attempts = 0;                                          //attempts to place ship - for testing
