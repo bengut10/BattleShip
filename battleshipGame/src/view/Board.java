@@ -3,23 +3,15 @@ package view;
 import java.text.StringCharacterIterator;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import controller.GameController;
 import javafx.scene.input.MouseEvent;
 
 public class Board extends Parent 
 {	
-	VBox rows = new VBox();
-	GameController gameC;
-	public GridPane gridPane = new GridPane();	
-
-	public Board(){
-		
+	private VBox rows = new VBox();
+	public Board(){	
 	}
-	
-	
 	public VBox createBoard(EventHandler<? super MouseEvent> handler)
 	{
 		String alpha = "abcdefghij";
@@ -40,7 +32,7 @@ public class Board extends Parent
 				}
 				String cordinate = Character.toString(current) + d;
 				Cell cell = new Cell(cordinate, z, i, this);
-                cell.setOnMouseClicked(handler);
+				cell.setOnMouseClicked(handler);
                 row.getChildren().add(cell);	
                 d++;
 			}
@@ -50,8 +42,6 @@ public class Board extends Parent
 		getChildren().add(rows);
 		return rows;
 	}
-	
-	
 	public Cell getCell(int x, int y){  
 		return (Cell)((HBox)rows.getChildren().get(y)).getChildren().get(x);
 	}

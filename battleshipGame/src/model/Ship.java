@@ -10,24 +10,8 @@ public class Ship implements Serializable {
 	private ArrayList<String> locationCells;  
 	private String name;
 	private int shipSize;
-	private String shipMessage;
 	
-	Ship(){}
-	
-	
-	public String getShipMessage() {
-		return shipMessage;
-	}
-
-	public void setShipMessage(String shipMessage) {
-		this.shipMessage = shipMessage;
-	}
-	public String getSipMessage(){
-		return this.shipMessage;
-	}
-	public String getName(){
-		return this.name;
-	}
+	Ship(){}	
 	
 	public int getShipSize() {
 		return shipSize;
@@ -61,10 +45,7 @@ public class Ship implements Serializable {
 			if(locationCells.isEmpty())
 			{              
 				result = "sink";
-				shipMessage = "You sunk the enemy's " + name;
 				System.out.println("You sunk the enemy's " + name + " ");
-				
-				setShipMessage("You sunk the enemy's "+ name);
 			}
 			else
 			{

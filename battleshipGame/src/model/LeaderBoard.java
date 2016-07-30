@@ -14,7 +14,6 @@ public class LeaderBoard implements Serializable{
 		this.list = readFromFile(); 
 	}
 	
-	
 	public ArrayList<Game> displayLeaderBoard()
 	{
 		return this.list;

@@ -8,9 +8,9 @@ public abstract class Game implements Serializable
 	private static final long serialVersionUID = 1L;
 	private int score;
 	private String playerName;
+	abstract public void StartGame();
 	
-	public Game(){
-		
+	public Game(){	
 	}
 	
 	public Game(String playerName)
@@ -18,8 +18,6 @@ public abstract class Game implements Serializable
 		this.setPlayerName(playerName);
 		score = 1000;
 	}
-
-	abstract public void StartGame();
 	
 	public void missedShot()
 	{
@@ -33,20 +31,20 @@ public abstract class Game implements Serializable
 	
 	public void endGame()
 	{
-		
 		LeaderBoard lb = new LeaderBoard();
 		lb = new LeaderBoard();
 		lb.storeScore(this);
 		GameController gc = new GameController();
-		gc.performOperation("Notify view of changes");
-		
+		gc.performOperation("Notify view of changes");	
 	}
 
-	public String getPlayerName() {
+	public String getPlayerName() 
+	{
 		return playerName;
 	}
 
-	public void setPlayerName(String playerName) {
+	public void setPlayerName(String playerName)
+	{
 		this.playerName = playerName;
 	}
 }

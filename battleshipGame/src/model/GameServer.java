@@ -17,7 +17,7 @@ public class GameServer {
 	public GameServer(){
 		
 		// initialize	
-		handler = new ServerHandler[MAX_PLAYERS];
+		handler    = new ServerHandler[MAX_PLAYERS];
 		numPlayers = 0;
 		handler[0] = null;
 		handler[1] = null;
@@ -32,11 +32,13 @@ public class GameServer {
 			while(true){
 				
 				System.out.println("Waiting for client to connect");
-				// give client privilege to connect
-			    clientSocket = serverSocket.accept();
-				//start handler thread 
-				new ServerHandler(clientSocket, this).start();
 				
+				/* waits for a client to connect to the severSocket and accepts it, once connection is
+				 made the system comes back into this loop and starts the ServerHandler thread */
+			    clientSocket = serverSocket.accept();
+
+				//start handler thread 
+				new ServerHandler(clientSocket, this).start();			
 				
 			}
 		}
@@ -66,7 +68,7 @@ public class GameServer {
 				
 			}
 			
-			//if handler is full
+			//if handler[] is full
 			return -1;	
 			
 		}
@@ -93,8 +95,8 @@ public class GameServer {
 			
 		}
 		
-	 // public static void main(String args[]) 
-	 // {  new GameServer();  }
+	  public static void main(String args[]) 
+	  {  new GameServer();  }
 
 
 }
