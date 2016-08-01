@@ -70,7 +70,7 @@ public class ViewHandler
 		window.setTitle("Leader Board");
 		window.setMinWidth(250);
 		GameController gc = new GameController();
-		gc.performOperation("get me the leaderboard");
+		gc.getLeaderBoard();
 		
 		TableColumn <Object, String> nameColumn = new TableColumn<> ("Name");
 		nameColumn.setMinWidth(200);

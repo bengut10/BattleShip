@@ -46,13 +46,14 @@ public class MainWindow extends Application{
 		hbox.setAlignment(Pos.BOTTOM_CENTER);
 		/*-------------------------------------------------- */
 		BorderPane bp = new BorderPane();
+		bp.setId("MainWindow");
 		bp.setBottom(hbox);	
-		
-		
 		
 		/*-------------------------------------------------- */
 		Scene scene1 =  new Scene(bp, 900,373);
 		scene1.getStylesheets().add("style.css");
+		
+		
 		/*-------------------------------------------------- */
 		window.setScene(scene1);
 		window.show();

@@ -8,6 +8,8 @@ public abstract class Game implements Serializable
 	private static final long serialVersionUID = 1L;
 	private int score;
 	private String playerName;
+	
+	
 	abstract public void StartGame();
 	
 	public Game(){	
@@ -35,7 +37,7 @@ public abstract class Game implements Serializable
 		lb = new LeaderBoard();
 		lb.storeScore(this);
 		GameController gc = new GameController();
-		gc.performOperation("Notify view of changes");	
+		gc.notifyOfWin();
 	}
 
 	public String getPlayerName() 

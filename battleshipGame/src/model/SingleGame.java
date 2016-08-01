@@ -6,7 +6,6 @@ import java.util.Random;
 
 public class SingleGame extends Game implements Serializable
 {
-	
 	private static final long serialVersionUID = 1L;
 	private ArrayList <Ship> playerListOfShips = new ArrayList<Ship>();   
 	private ArrayList <Ship> enemyListOfShips = new ArrayList <Ship>();
@@ -16,8 +15,7 @@ public class SingleGame extends Game implements Serializable
 	private Boolean enemyTurn = false;
 	private int  xEnemyCord;
 	private int yEnemyCord;
-	
-	
+
 	public int getXenemyCord()
 	{
 		return xEnemyCord;
@@ -32,8 +30,8 @@ public class SingleGame extends Game implements Serializable
 	{
 		super(name);
 	}
-	@Override
 	
+	@Override
 	public void StartGame() 
 	{
 		Ship shipOne = new Ship(5,  "Carrier"); 
@@ -78,16 +76,13 @@ public class SingleGame extends Game implements Serializable
 
 	public boolean checkUserGuess(String userGuess)
 	{   
-		
 		String result = "miss";   
 		for(Ship ship : enemyListOfShips)
 		{
 			result = ship.shipWasShot(userGuess);
 			
-			
 			if(result.equalsIgnoreCase("hit"))
 			{
-				
 				return true;
 			}
 			if(result.equalsIgnoreCase("sink"))  
@@ -109,12 +104,10 @@ public class SingleGame extends Game implements Serializable
 	
 	public boolean checkEnemyGuess(String enemyGuess)
 	{   
-		
 		String result = "miss";   
 		for(Ship ship : playerListOfShips)
 		{
 			result = ship.shipWasShot(enemyGuess);	
-			
 			if(result.equalsIgnoreCase("hit"))
 			{
 				return true;
@@ -122,7 +115,6 @@ public class SingleGame extends Game implements Serializable
 			if(result.equalsIgnoreCase("sink"))  
 			{
 				playerListOfShips.remove(ship);
-				
 				if(playerListOfShips.isEmpty())
 				{
 					System.out.println("43343");
@@ -134,22 +126,16 @@ public class SingleGame extends Game implements Serializable
 		return false;
 	}
 	
-	public boolean enemyMove(int difficulty){
-	
+	public boolean enemyMove(){
 		String enemyGuess = "";
 		String temp = "";
-	
 		int x = random.nextInt(10);
 		xEnemyCord = x;
 		int y = random.nextInt(10);
 		yEnemyCord = y;
 		temp = String.valueOf(alpha.charAt(x));     //get numeric equivalent column value
 		enemyGuess = (temp.concat(Integer.toString(y)));
-			
 		enemyTurn = checkEnemyGuess(enemyGuess);
-	
 		return enemyTurn;
-	
 	}
-
 }

@@ -15,13 +15,13 @@ public class Grid implements Serializable {
 	public ArrayList<String> placeShipsOnGrid(int shipSize) 
 	{
 		ArrayList<String> alphaCells = new ArrayList<String>();     // holds alpha numeric coordinates such as c7
+		@SuppressWarnings("unused")
 		String[] alphacoords = new String[shipSize];            
 		String temp = null;                                        //temp concat variable
 		int [] coordinates  = new int [shipSize];                  //current possible coordinates 
 		int attempts = 0;                                          //attempts to place ship - for testing
 		boolean success = false;                                   //found a good starting location for ship placement?
 		int location = 0;                                          //starting location 
-		
 		shipCount++;                                               //next ship
 		int incr = 1;                                              //set horizontal increment
 		if ((shipCount % 2) ==1 ){                                 //if odd entry of ship, place vertically
@@ -46,8 +46,7 @@ public class Grid implements Serializable {
 					if (x>0 && (location % gridLength == 0))       //out of bounds - right edge
 					{
 						success = false;                           //failure to place the ship
-					}
-					
+					}	
 				}
 				else
 				{
@@ -55,8 +54,8 @@ public class Grid implements Serializable {
 					success = false;                              //failure to place ship
 				}
 			} 
-			
 		}
+		
 		int x = 0;                                               //turn ship location into alpha coordinates 
 		int row = 0; 
 		int column = 0;
@@ -71,9 +70,6 @@ public class Grid implements Serializable {
 			x++;
 			System.out.print("  coord "+x+" = " + alphaCells.get(x-1)+ "\n"); //show ship placement 
 		}
-		
 		return alphaCells;
-	
    }
-
 }
