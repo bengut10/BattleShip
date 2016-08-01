@@ -17,7 +17,6 @@ public class GameServer {
 	public GameServer(){
 		
 		// initialize	
-		//
 		handler    = new ServerHandler[MAX_PLAYERS];
 		numPlayers = 0;
 		handler[0] = null;
