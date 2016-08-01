@@ -16,8 +16,7 @@ public class GameServer {
 	@SuppressWarnings("resource")
 	public GameServer(){
 		
-		// initialize	
-		//
+		// initialize
 		handler    = new ServerHandler[MAX_PLAYERS];
 		numPlayers = 0;
 		handler[0] = null;
