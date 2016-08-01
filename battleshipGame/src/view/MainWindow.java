@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 public class MainWindow extends Application{
 	
 	Stage window;
-
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{

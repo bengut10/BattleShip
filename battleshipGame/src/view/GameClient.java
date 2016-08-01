@@ -19,11 +19,14 @@ import controller.GameController;
 	  
 	  private static final int PORT = 1234;     
 	  private static final String HOST = "localhost";
+	
 	  private static final int MAX_PLAYERS = 2;
 	  private final static int PLAYER1    = 1;
-	  private final static int PLAYER2    = 2;
+	  private final static int PLAYER2    = 2; 
+	  
 	  private Socket sock;
 	  private PrintWriter out; 
+	  
 	  private int playerID;
 	  private String status;         // used to place info into the 3D canvas
 	  private int numPlayers;

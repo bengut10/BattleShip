@@ -3,14 +3,17 @@ package view;
 import java.io.BufferedReader;
 
 public class GameHandler extends Thread {
+	
 	  private GameClient gameClient;    
 	  private BufferedReader in;
 	
 	GameHandler(GameClient gameClient, BufferedReader in){
 		
 		this.gameClient = gameClient;
-		this.in         = in;	
+		this.in         = in;
+		
 	}
+	
 	/* read from the server's buffer and assign functions accordingly, server messages are passed in from the GameClient
 	contactServer function */
 	public void run(){
