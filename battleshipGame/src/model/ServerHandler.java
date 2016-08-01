@@ -1,7 +1,6 @@
 package model;
 
 import java.net.*;
-import java.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,10 +14,8 @@ public class ServerHandler extends Thread {
 	  private Socket clientSock;
 	  private BufferedReader in;
 	  private PrintWriter out;
-
 	  private int playerID;     
-
-
+	  
 	  public ServerHandler(Socket s, GameServer serv)
 	  {
 		  

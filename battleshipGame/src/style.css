@@ -1,11 +1,16 @@
-.root
+#MainWindow
 {
-	-fx-background-color: #383838;
+	-fx-background-image: url('"giphy.gif"');
+	-fx-background-position: center center; 
+	-fx-background-size: 900, 373; 
+	-fx-background-repeat: stretch;
 }
 
 .button {
-  -fx-background-color: linear-gradient(#ff5400, #be1d00);
+  	-fx-background-color: linear-gradient(#ff5400, #be1d00);
     -fx-background-radius: 30;
     -fx-background-insets: 0;
     -fx-text-fill: white;
 }
+
+

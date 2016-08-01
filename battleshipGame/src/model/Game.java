@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import controller.GameController;
 
 public abstract class Game implements Serializable
 {
@@ -9,8 +10,9 @@ public abstract class Game implements Serializable
 	private String playerName;
 	
 	
-	public Game(){
-		
+	abstract public void StartGame();
+	
+	public Game(){	
 	}
 	
 	public Game(String playerName)
@@ -18,8 +20,6 @@ public abstract class Game implements Serializable
 		this.setPlayerName(playerName);
 		score = 1000;
 	}
-
-	abstract public void StartGame();
 	
 	public void missedShot()
 	{
@@ -36,13 +36,17 @@ public abstract class Game implements Serializable
 		LeaderBoard lb = new LeaderBoard();
 		lb = new LeaderBoard();
 		lb.storeScore(this);
+		GameController gc = new GameController();
+		gc.notifyOfWin();
 	}
 
-	public String getPlayerName() {
+	public String getPlayerName() 
+	{
 		return playerName;
 	}
 
-	public void setPlayerName(String playerName) {
+	public void setPlayerName(String playerName)
+	{
 		this.playerName = playerName;
 	}
 }

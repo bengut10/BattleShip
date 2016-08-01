@@ -53,8 +53,6 @@ public class Cell extends Rectangle {
 	public void setUsed(Boolean used) {
 		this.used = used;
 	}
-	
-	
-	
+		
 }
 
