@@ -1,7 +1,6 @@
 package model;
 
 import java.net.*;
-import java.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,10 +14,8 @@ public class ServerHandler extends Thread {
 	  private Socket clientSock;
 	  private BufferedReader in;
 	  private PrintWriter out;
-
 	  private int playerID;     
-
-
+	  
 	  public ServerHandler(Socket s, GameServer serv)
 	  {
 		  
@@ -41,10 +38,12 @@ public class ServerHandler extends Thread {
 
 	  public void run()
 	  {
+		  	  
 		  // player being added and assigned an ID
 		  playerID = server.addPlayer(this);
 		  
-		  if( playerID != -1) // if -1 then game is full
+		  // if -1 then game is full
+		  if( playerID != -1)
 		  {
 			  
 			  sendMessage("OK " + playerID); // send message to other player
@@ -59,7 +58,8 @@ public class ServerHandler extends Thread {
 		    else    // game is full
 		      sendMessage("full");
 
-		    try {     // close socket from player
+		    try {    
+		    	// close socket from player
 		      clientSock.close();
 		      System.out.println("Player " + playerID + " connection closed\n");
 		    }
@@ -68,6 +68,7 @@ public class ServerHandler extends Thread {
 
 		  }		  		  	
 
+	  // uses buffer to read client's input
 	   private void processPlayerInput()
 	   {
 		    String line;
@@ -77,7 +78,7 @@ public class ServerHandler extends Thread {
 		         if((line = in.readLine()) == null)
 		           done = true;
 		         else {
-		           // System.out.println("Player " + playerID + " msg: " + line);
+
 		           if (line.trim().equals("disconnect"))
 		             done = true;
 		           else 
@@ -101,8 +102,7 @@ public class ServerHandler extends Thread {
 	      try {
 	    	  
 	          int posn = Integer.parseInt( line.substring(4).trim() );
-	          // System.out.println("Player " + playerID + " wants to occupy position " + posn);
-
+	         
 	          if (server.maxPlayer())
 	            server.notifyOthers(playerID, "otherTurn " + playerID + " " + posn);  // pass turn to others
 	          else
@@ -118,7 +118,7 @@ public class ServerHandler extends Thread {
 	  synchronized public void sendMessage(String msg)
 	  { try {
 		  
-		  // send message
+		  // send message to buffer
 		  out.println(msg);
 
 	    }

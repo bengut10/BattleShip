@@ -6,24 +6,31 @@ import java.util.Random;
 
 public class SingleGame extends Game implements Serializable
 {
-	
 	private static final long serialVersionUID = 1L;
 	private ArrayList <Ship> playerListOfShips = new ArrayList<Ship>();   
 	private ArrayList <Ship> enemyListOfShips = new ArrayList <Ship>();
-	private GameHelper helper = new GameHelper();  
+	private Grid grid = new Grid();
 	private Random random = new Random();
 	private String alpha = "abcdefghij";
 	private Boolean enemyTurn = false;
 	private int  xEnemyCord;
 	private int yEnemyCord;
-	private int playerScore;
-	private String message;
+
+	public int getXenemyCord()
+	{
+		return xEnemyCord;
+	}
+	
+	public int getYenemyCord()
+	{
+		return yEnemyCord;
+	}
+	
 	public SingleGame(String name)
 	{
 		super(name);
 	}
 	
-
 	@Override
 	public void StartGame() 
 	{
@@ -53,42 +60,37 @@ public class SingleGame extends Game implements Serializable
 		
 		for (int i = 0; i<enemyListOfShips.size(); i++)
 		{ 
-			ArrayList<String> enemyLocation = helper.placeShip(enemyListOfShips.get(i).getShipSize()); 
+			ArrayList<String> enemyLocation = grid.placeShipsOnGrid(enemyListOfShips.get(i).getShipSize()); 
 			enemyListOfShips.get(i).setLocationCells(enemyLocation);  
 			
 			
 		}
 		for (int i = 0; i<playerListOfShips.size(); i++)
 		{
-			ArrayList<String> playerLocation = helper.placeShip(playerListOfShips.get(i).getShipSize()); 
+			ArrayList<String> playerLocation = grid.placeShipsOnGrid(playerListOfShips.get(i).getShipSize()); 
 			playerListOfShips.get(i).setLocationCells(playerLocation);
 			//System.out.println(playerListOfShips.get(i));
 		}
 		
 	} 
-	
-	
+
 	public boolean checkUserGuess(String userGuess)
 	{   
-		
 		String result = "miss";   
 		for(Ship ship : enemyListOfShips)
 		{
-			result = ship.wasShot(userGuess);
-			
+			result = ship.shipWasShot(userGuess);
 			
 			if(result.equalsIgnoreCase("hit"))
 			{
-				
 				return true;
 			}
 			if(result.equalsIgnoreCase("sink"))  
 			{
-				message = ship.getShipMessage();
 				enemyListOfShips.remove(ship);
 				if(enemyListOfShips.isEmpty())
 				{
-					System.out.println("43343");
+					
 					endGame();
 				}
 				return true;
@@ -97,18 +99,15 @@ public class SingleGame extends Game implements Serializable
 		
 		missedShot();
 		System.out.println(getScore());
-		playerScore =getScore();
 		return false;
 	}
 	
 	public boolean checkEnemyGuess(String enemyGuess)
 	{   
-		
 		String result = "miss";   
 		for(Ship ship : playerListOfShips)
 		{
-			result = ship.wasShot(enemyGuess);	
-			
+			result = ship.shipWasShot(enemyGuess);	
 			if(result.equalsIgnoreCase("hit"))
 			{
 				return true;
@@ -116,7 +115,6 @@ public class SingleGame extends Game implements Serializable
 			if(result.equalsIgnoreCase("sink"))  
 			{
 				playerListOfShips.remove(ship);
-				
 				if(playerListOfShips.isEmpty())
 				{
 					System.out.println("43343");
@@ -128,53 +126,16 @@ public class SingleGame extends Game implements Serializable
 		return false;
 	}
 	
-	public boolean enemyMove(int difficulty){
-	
+	public boolean enemyMove(){
 		String enemyGuess = "";
 		String temp = "";
-	
 		int x = random.nextInt(10);
 		xEnemyCord = x;
 		int y = random.nextInt(10);
 		yEnemyCord = y;
 		temp = String.valueOf(alpha.charAt(x));     //get numeric equivalent column value
 		enemyGuess = (temp.concat(Integer.toString(y)));
-			
 		enemyTurn = checkEnemyGuess(enemyGuess);
-	
 		return enemyTurn;
-	
 	}
-	
-	public int getXenemyCord()
-	{
-		return xEnemyCord;
-	}
-	public int getYenemyCord()
-	{
-		return yEnemyCord;
-	}
-
-
-	public int getPlayerScore() {
-		return playerScore;
-	}
-
-
-	public void setPlayerScore(int playerScore) {
-		this.playerScore = playerScore;
-	}
-
-
-	public String getMessage() {
-		return message;
-	}
-
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-
-
 }
