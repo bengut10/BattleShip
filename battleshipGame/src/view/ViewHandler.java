@@ -43,7 +43,7 @@ public class ViewHandler
 		button.setOnAction( e ->
 		{
 			ViewHandler.userName =  (String) nameInput.getText();
-			openW.displayWindow("BattleShip");
+			openW.displayWindow(title);
 			window.close();
 		});
 		
