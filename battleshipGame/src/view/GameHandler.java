@@ -1,15 +1,16 @@
 package view;
 
 import java.io.BufferedReader;
+import java.util.StringTokenizer;
 
 public class GameHandler extends Thread {
 	
-	  private GameClient gameClient;    
+	  private MultiPlayer multiPlayer;    
 	  private BufferedReader in;
 	
-	GameHandler(GameClient gameClient, BufferedReader in){
+	GameHandler(MultiPlayer multiPlayer, BufferedReader in){
 		
-		this.gameClient = gameClient;
+		this.multiPlayer = multiPlayer;
 		this.in         = in;
 		
 	}
@@ -18,24 +19,30 @@ public class GameHandler extends Thread {
 	contactServer function */
 	public void run(){
 		
-	//	System.out.println("Inside game handler");
-		
 	    String line;
 	    try {
 	      while ((line = in.readLine()) != null) {
-	        if (line.startsWith("OK"))
+	  	 
+      if (line.startsWith("OK")) // this is read in from the severHandler when a player is added
 	          extractID(line.substring(3));
 	        else if (line.startsWith("full"))
-	          gameClient.disconnectClient("full game");    // disable client
+	          multiPlayer.disconnectClient("full game");    // disable client
+	        else if (line.startsWith("start"))
+	        	System.out.println("Game Started");
+	        else if ((line.length() >= 6) &&     // "WHO$$ "
+            (line.substring(0,5).equals("WHO$$")))
+	            showWho( line.substring(5).trim() ); 
 
 	        else  
-	          System.out.println("ERR: " + line + "\n");
+	        	
+	            multiPlayer.showMsg(line + "\n");
+
 	      }
 	    }
 	    catch(Exception e)    
 	    { 
 	    	
-	    	gameClient.disconnectClient("server link lost");   // end game as well
+	    	multiPlayer.disconnectClient("server link lost");   // end game as well
 	    
 		
 	    }
@@ -49,6 +56,31 @@ public class GameHandler extends Thread {
 	private void extractOther(){
 		
 	}
+	
+	//***********************Chat function******************************** 
+	  private void showWho(String line)
+	  /*  line has the format:
+	             "cliAddr1 & port1 & ... cliAddrN & portN & "
+	      Reformat it before calling showMsg() in the client.
+	  */
+	  { StringTokenizer st = new StringTokenizer(line, "&");
+	    String addr;
+	    int port;
+	    int i = 1;
+	    try {
+	      while (st.hasMoreTokens()) {
+	        addr = st.nextToken().trim();
+	        port = Integer.parseInt( st.nextToken().trim() );
+	        multiPlayer.showMsg("" + i + ". " + addr + " : " + port + "\n");
+	        i++;
+	      }
+	      // client.showMsg("\n");
+	    }
+	    catch(Exception e)
+	    { multiPlayer.showMsg("Problem parsing who info.\n");
+	      System.out.println("Parsing error with who info: \n" + e);  
+	    }
+	  }  // end of showWho()
 	
 
 }

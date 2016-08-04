@@ -2,6 +2,7 @@ package model;
 
 import java.net.*;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -14,14 +15,19 @@ public class ServerHandler extends Thread {
 	  private Socket clientSock;
 	  private BufferedReader in;
 	  private PrintWriter out;
-	  private int playerID;     
+	  private int playerID;  
+	  
+	  // chat
+	  private String cliAddr;
+	  private int port;
 	  
 	  public ServerHandler(Socket s, GameServer serv)
 	  {
 		  
 		  // assign s and serv to instance variable
-		  clientSock = s;
-		  server = serv;
+		  this.clientSock = s;
+		  this.server = serv;
+
 		  
 		  System.out.println("Player has requested connection");
 		  
@@ -45,10 +51,10 @@ public class ServerHandler extends Thread {
 		  // if -1 then game is full
 		  if( playerID != -1)
 		  {
-			  
+			  	 
 			  sendMessage("OK " + playerID); // send message to other player
 			  System.out.println("ok " + playerID); // tell other player
-			  server.notifyOthers(playerID, "Added " + playerID);
+			  server.notifyOthers(playerID, "\nPlayer " + playerID + " connected");
 			  
 			  processPlayerInput();
 			  
@@ -98,6 +104,8 @@ public class ServerHandler extends Thread {
 	
 	  private void doRequest(String line)
 	  {
+		  
+
 	    if (line.startsWith("try")) {
 	      try {
 	    	  
@@ -111,8 +119,11 @@ public class ServerHandler extends Thread {
 	      
 	      catch(NumberFormatException e)
 	      { System.out.println(e); } 
-	    }
-	  } 
+	    } 
+		  
+		  
+		  }
+	  
 
 
 	  synchronized public void sendMessage(String msg)
@@ -127,6 +138,28 @@ public class ServerHandler extends Thread {
 	    	System.out.println("Handler for player " + playerID + "\n" + e);	    	
 	    }
 	  } 
+	  
+	  private void processClient(BufferedReader in){
+		  
+		   String line;
+		     boolean done = false;
+		     try {
+		       while (!done) {
+		         if((line = in.readLine()) == null)
+		           done = true;
+		         else {
+		           System.out.println("Client (" + cliAddr + ", " + 
+										port + "): " + line);
+		           if (line.trim().equals("bye"))
+		             done = true;
+		           else 
+		             doRequest(line);
+		         }
+		       }
+		     }
+		     catch(IOException e)
+		     {  System.out.println(e);  }
+	  }
 
 
 
