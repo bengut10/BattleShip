@@ -89,6 +89,17 @@ public class Cell extends Rectangle {
 	public void setUsed(Boolean used) {
 		this.used = used;
 	}
-		
+	public void markShip(boolean isShip)
+	{
+		if(isShip)
+		{	
+			setFill(Color.YELLOW);
+			this.setUsed(true);	
+		}
+		else
+		{
+			setFill(Color.WHITE);
+			this.setUsed(true);	
+		}
+	}
 }
-
