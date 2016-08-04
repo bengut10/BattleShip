@@ -19,7 +19,7 @@ public class MainWindow extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception
 	{
-		boolean stop = false;
+		
 		window = primaryStage;
 		window.setOnCloseRequest(e ->
 		{
