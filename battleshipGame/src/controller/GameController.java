@@ -11,6 +11,7 @@ public class GameController
 {	
 	private SingleGame sg = new SingleGame(ViewHandler.userName);
 	private SinglePlayer sp;
+	private int difficulty = 8;
 	
 	public GameController()
 	{
@@ -29,9 +30,16 @@ public class GameController
 	
 	public boolean CompareEnemyCoord()
 	{
-		sp.setX(sg.getXenemyCord());
-		sp.setY(sg.getYenemyCord());
-		return sg.enemyMove();
+		if(sg.enemyMove(difficulty)){
+			sp.setX(sg.getXenemyCord());
+			sp.setY(sg.getYenemyCord());
+			return true;
+		}
+		else{
+			sp.setX(sg.getXenemyCord());
+			sp.setY(sg.getYenemyCord());
+			return false;
+		}
 	}
 	
 	
@@ -46,5 +54,8 @@ public class GameController
 	{
 		ViewHandler.displayWinning();
 		SinglePlayer.gameNotOver = true;
+	}
+	public void setDifficulty(int difficulty){
+		this.difficulty = difficulty;
 	}
 }

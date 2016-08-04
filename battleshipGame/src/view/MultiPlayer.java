@@ -1,76 +1,74 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
+import java.util.ArrayList;
+import controller.GameMultiController;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class MultiPlayer implements Window{
+public class MultiPlayer implements Window
+{	
+	private boolean isServer = false;
+	private TextArea messages = new TextArea();
+	private ArrayList <String> myCoordList = null;
+	private ArrayList <String> enemyCoordList = null;
+	private Connection connection = isServer ? createServer() : createClient();
+	static Boolean ready = false;
+	private Button button = new Button("StartGame");
 	
-	//**************************************************************  
-	  private static final int PORT = 1234;     
-	  private static final String HOST = "localhost";
+	MultiPlayer() 
+	{
+		try 
+		{
+			connection.startConnection();
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+	}
 	
-	  private static final int MAX_PLAYERS = 2;
-	  private final static int PLAYER1    = 1;
-	  private final static int PLAYER2    = 2; 
-	  
-	  private Socket sock;
-	  private PrintWriter out; 
-	  
-	  private int playerID;
-	  private String status;         
-	  private int numPlayers;
-	  private int currPlayer;       
-	  private boolean isDisabled;   
+	private Server createServer()
+	{
+		return new Server(55555,data -> 
+		{
+			Platform.runLater(() -> {
+			messages.appendText(data.toString() + "\n");
+			});
+		});
+	}
 	
-	  // chat variables
-	  private String chatMSG;
-	  
-		TextArea chatText = new TextArea("Waiting for second player to connect..........");
-	  
-	
-   //****************************************************************************
-	MultiPlayer(){
-	
-		///******************************************************
-	    playerID = 0;     // no id as yet
-	    status = null;    // no status to report 
-	    numPlayers = 0;
-	    currPlayer = 1;    // player 1 starts first
-	    isDisabled = false;
-	    ///*********************************************************
-
+	private Client createClient(){
+		return new Client("127.0.0.1",55555, data->
+		{
+			Platform.runLater(()-> 
+			{
+				messages.appendText(data.toString() + "\n");
+			});
+		
+		});
 	}
 
+	public void setMyCoordList(ArrayList <String> myCoordList)
+	{
+		this.myCoordList = myCoordList;
+	}
+	
+	
+	
 	@Override
-	synchronized public void displayWindow(String title) {
+	public void displayWindow(String title) 
+	{
 		Stage window = new Stage();
 		window.setTitle("Game Screen");
 		
@@ -81,128 +79,89 @@ public class MultiPlayer implements Window{
 		Board opponentB = new Board();
 		HBox hbox = new HBox(10);
 		
-		vbox2 = playerB.createBoard(event->{
+		button.setOnAction(event->
+		{
+			try 
+			{
+				connection.send(myCoordList);
+			}
+			catch (Exception e1) 
+			{
+				e1.printStackTrace();
+			}
+			ready = true;
+		});
+
+		GameMultiController multiController = new GameMultiController(this);
+		
+		vbox2 = playerB.createMultiBoard(this.myCoordList);		
+		
+		vbox1 = opponentB.createBoard(event->
+		{
+			if(ready == true)
+			{
+				Boolean wasAHit = false;
+				Cell cell = (Cell) event.getSource();
+				if(!cell.getUsed())
+				{
+					Object userCordinate = (Object) cell.getCellCordinate();
+					for(Object S1 : Connection.info)
+					{
+						if(userCordinate.equals(S1))
+						{
+							wasAHit = true;
+						}
+					}
+					if(wasAHit == true)
+					{
+						cell.changeStatus(true);
+					}
+					else
+					{
+						cell.changeStatus(false);
+					}
+				}
+			}
 		});
 		
-		vbox1 = opponentB.createBoard(event->{	
-		});
-		
-		hbox.getChildren().addAll(vbox1, vbox2);
+		hbox.getChildren().addAll(vbox2, vbox1);
 		
 		VBox chat = new VBox();
-		//TextArea chatText = new TextArea("Waiting for second player to connect..........");
-		chatText.setPrefHeight(180);
-		Button send = new Button("Send");
-			
-		chat.getChildren().addAll(chatText, send);
+		
+	
+		messages.setPrefHeight(180);
+		TextField input = new TextField();
+
+		input.setOnAction(event-> 
+		{
+			if(ready == true)
+			{
+				String message = isServer ? "Player 1: " : "Player 2: ";
+				message += input.getText();
+				input.clear();
+				messages.appendText(message + "\n"); 
+				try
+				{
+					connection.send(message);
+				}
+				catch(Exception e)
+				{
+					messages.appendText("Failed to send \n");
+				}
+			}
+			});
+	
+		
+		chat.getChildren().addAll(input,messages,button);
 		chat.setAlignment(Pos.BOTTOM_CENTER);
 		
 		layout.setPadding(new Insets(20, 20, 20, 20));
 		layout.setCenter(hbox);
 		layout.setBottom(chat);
-		
+
 		Scene scene = new Scene(layout, 750, 600);
 		window.setScene(scene);
 		window.show();
-		
-		// contact the server and start the gameHandler thread
-	    contactServer();
-	    
-		send.setOnAction(e-> 
-		{
-			if (e.getSource() == send)
-			{
-				chatMSG = chatText.getText().trim();
-				sendMessage(chatMSG);
-
-			}
-		});
-	    
-
 	}
-	
-	//***********************************************************
-
-
-	synchronized private void contactServer(){
-	    try {
-	    	
-	        sock = new Socket(HOST, PORT);
-	        BufferedReader in  = new BufferedReader( 
-	  		  		new InputStreamReader( sock.getInputStream() ) );
-	        out = new PrintWriter( sock.getOutputStream(), true );
-
-	       
-	        // start watching for server message
-	        new GameHandler(this, in).start();  
-	      }
-	      catch(Exception e)
-	      {  
-	         System.out.println("Cannot contact the Server");
-	         System.exit(0);
-	       }
-	}
-	
-	
-	// force client to disconnect if not disconnected when they quit
-	synchronized public void disconnectClient(String message){
-		
-		  { if (!isDisabled) {    // the client can only be disabled once
-		      try {
-		        isDisabled = true;
-		        out.println("disconnect");  // tell server
-		        sock.close();
-		        setStatus("Game Over: " + message);
-
-		      }
-		      catch(Exception e)
-		      {  System.out.println( e );  }
-		    }
-		  }
-		
-	}
-		  
-	synchronized public void setStatus(String message){
-		
-		status = message;
-		
-	}
-	
-	synchronized public String getStatus(){
-		
-		return status;
-	}
-
-	public void showMsg(final String msg)
-
-	  { 
-
-	    Runnable updateMsgsText = new Runnable() {
-	      public void run() 
-	      { 
-	    	  chatText.appendText(msg);  // append message to text area
-
-	      }
-	    };
-	    SwingUtilities.invokeLater( updateMsgsText );
-	  } // end of showMsg()
-
-	
-	private void sendMessage(String chatMessage){
-		
-	    if (chatMessage.equals(""))
-	        JOptionPane.showMessageDialog( null, 
-	             "No message entered", "Send Message Error", 
-	  			JOptionPane.ERROR_MESSAGE);
-	      else {
-	        out.println(chatMessage);
-
-	      }
-		
-		
-	}
-	//***********************************************************************************************
-
-
 
 }
