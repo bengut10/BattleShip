@@ -2,6 +2,15 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * Implements the data storage needed for the players ships during a multiplier game. This includes 
+ * creating an placing the player's ships as well as creating a copy to send to the opponents game.
+ * Each ship is an ArrayList containing the ships string coordinates. All of the ships are then stored
+ * in an ArrayList to iterate through the ships. 
+ * @author RR2
+ * @version 1.0
+ *
+ */
 public class MultiGame extends Game
 {
 	
@@ -40,7 +49,10 @@ public class MultiGame extends Game
 		
 		
 	}
-	
+	/**
+	 * 
+	 * @return a copy of the player's ships with coordinates of their locations to the opponents game
+	 */
 	public ArrayList<String> getLocs()
 	{
 		return this.sendThisCoords;

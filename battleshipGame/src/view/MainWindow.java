@@ -12,6 +12,17 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+/**
+ * Creates the main window that the user first interacts with. The window contains an animation of
+ * a battle ship with sounds to go with it. The window contains 4 buttons for the user to interact 
+ * with: "Single Game", "Multiplayer Game", "Leaderboard", and "Exit". Selecting "Single Game" launches
+ * the SingleGame view and selecting "Multiplayer Game" launches the MultiPlayer view. Selecting "Leaderboard"
+ * will bring up a window that shows the leader board for previously played games and "Exit" will close 
+ * the application. This class contains the main function which launches the application. 
+ * @author RR2
+ * @version 1.0
+ *
+ */
 public class MainWindow extends Application{
 	
 	Stage window;

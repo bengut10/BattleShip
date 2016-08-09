@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.Random;
 /**
  * Implements the functionality and data storage needed for a single player game. The player's ships are contained in an ArrayList playerListOfShips. 
- * The enemy's ships are contained in an ArrayList enemyListOfShips. The purpose of this class is to compare enemy and player attacks to the Lists of ships
+ * The enemy's ships are contained in an ArrayList enemyListOfShips. Each ship is an ArrayList 
+ * containing the ships string coordinates. All of the ships are then stored
+ * in an ArrayList to iterate through the ships. 
+ * The purpose of this class is to compare enemy and player attacks to the Lists of ships
  * and return true or false back to the invoking object.
  * @author RR2
  * @version 1.0
