@@ -2,7 +2,12 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
+/**
+ * The Grid class randomly places ships of a player or enemy on a board and ensures that no 2 ships occupy the same coordinates on a game board.
+ * The ships that are placed are assigned grid coordinates in the form of "a9".
+ * @author RR2
+ * @version 1.0
+ */
 public class Grid implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -11,7 +16,13 @@ public class Grid implements Serializable {
 	private int gridSize = 100;
 	private int [] grid = new int [gridSize];
 	private int shipCount = 0;
-	
+/**
+ * Randomly places ships on 10 x 10 grid with every other ship being placed horizontally and vertically. If any of the selected spaces for the 
+ * ship are occupied, a new random starting location will be selected. The ships location will then be converted in to string coordinates in the 
+ * form of "a9" . 
+ * @param shipSize - the number of spaces that need to be chosen for the ship on the grid.
+ * @return The string coordinates of the placed ships
+ */
 	public ArrayList<String> placeShipsOnGrid(int shipSize) 
 	{
 		ArrayList<String> alphaCells = new ArrayList<String>();     // holds alpha numeric coordinates such as c7
