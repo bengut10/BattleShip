@@ -22,6 +22,7 @@ public class SingleGame extends Game implements Serializable
 	private Boolean enemyTurn = false;
 	private int  xEnemyCord;
 	private int yEnemyCord;
+	public static int difficulty = 12;
 	
 	/**
 	 * 
@@ -90,7 +91,6 @@ public class SingleGame extends Game implements Serializable
 			ArrayList<String> playerLocation = grid.placeShipsOnGrid(playerListOfShips.get(i).getShipSize()); 
 			this.sendThisCoords.addAll((ArrayList<String>) playerLocation.clone());	
 			playerListOfShips.get(i).setLocationCells(playerLocation);
-			//System.out.println(playerListOfShips.get(i));
 		}
 		
 	} 
@@ -133,7 +133,6 @@ public class SingleGame extends Game implements Serializable
 		}
 		
 		missedShot();
-		System.out.println(getScore());
 		return false;
 	}
 	
@@ -173,7 +172,7 @@ public class SingleGame extends Game implements Serializable
 	 * The recommended range is between 4 and 12, 4 making the most challenging opponent. 
 	 * @return - true if the enemy has hit one of the players ships, false if no player ship was hit
 	 */
-	public boolean enemyMove(int difficulty){
+	public boolean enemyMove(){
 		String enemyGuess = "";
 		String temp = "";
 		int probToHit = random.nextInt(difficulty);
@@ -183,14 +182,14 @@ public class SingleGame extends Game implements Serializable
 			Ship shipToHit = playerListOfShips.get(0);
 			ArrayList<String> cordsToHit = shipToHit.getLocationCells();
 			enemyGuess = cordsToHit.get(0);
-			System.out.println(enemyGuess);
 			char y = enemyGuess.charAt(1);
 			char x = enemyGuess.charAt(0);
 			xEnemyCord = alpha.indexOf(x);
 			yEnemyCord =  Character.getNumericValue(y);
 		}
-		
-		else{
+
+		else
+		{
 			int x = random.nextInt(10);
 			xEnemyCord = x;
 			int y = random.nextInt(10);
@@ -198,7 +197,6 @@ public class SingleGame extends Game implements Serializable
 			temp = String.valueOf(alpha.charAt(x));     //get numeric equivalent column value
 			enemyGuess = (temp.concat(Integer.toString(y)));
 		}
-		
 			
 		enemyTurn = checkEnemyGuess(enemyGuess);
 	

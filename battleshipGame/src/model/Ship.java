@@ -14,6 +14,7 @@ public class Ship implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private ArrayList<String> locationCells;  
+	@SuppressWarnings("unused")
 	private String name;
 	private int shipSize;
 	/**
@@ -76,12 +77,12 @@ public class Ship implements Serializable {
 			if(locationCells.isEmpty())
 			{              
 				result = "sink";
-				System.out.println("You sunk the enemy's " + name + " ");
+				
 			}
 			else
 			{
 				result = "hit";   
-				System.out.println("hit: " );
+				
 			}
 		}
 		return result;       

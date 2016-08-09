@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 public class MultiPlayer implements Window
 {	
-	private boolean isServer = false;
+	private boolean isServer = true;
 	private TextArea messages = new TextArea();
 	private ArrayList <String> myCoordList = null;
 	private ArrayList <String> enemyCoordList = null;

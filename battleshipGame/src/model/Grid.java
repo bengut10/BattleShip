@@ -50,7 +50,6 @@ public class Grid implements Serializable {
 				}
 				else
 				{
-					System.out.print(" used " + location);        //found an already used location
 					success = false;                              //failure to place ship
 				}
 			} 
@@ -59,7 +58,7 @@ public class Grid implements Serializable {
 		int x = 0;                                               //turn ship location into alpha coordinates 
 		int row = 0; 
 		int column = 0;
-		System.out.println("\n");
+	
 		while (x < shipSize)
 		{
 			grid[coordinates[x]] = 1;
@@ -68,7 +67,6 @@ public class Grid implements Serializable {
 			temp = String.valueOf(alphabet.charAt(column));     //get numeric equivalent column value
 			alphaCells.add(temp.concat(Integer.toString(row))); //convert to alpha
 			x++;
-			System.out.print("  coord "+x+" = " + alphaCells.get(x-1)+ "\n"); //show ship placement 
 		}
 		return alphaCells;
    }

@@ -67,6 +67,7 @@ public class SinglePlayer implements Window
 	@Override
 	public void displayWindow(String title) 
 	{
+		
 		window = new Stage();
 		window.setTitle(title);
 		BorderPane layout = new BorderPane();
@@ -76,6 +77,7 @@ public class SinglePlayer implements Window
 		enemy = new Board();
 		
 		gc = new GameController(this);
+		
 		
 		vbox2 = myself.createBoard(event->{
 			//do nothing.
@@ -131,33 +133,12 @@ public class SinglePlayer implements Window
 		button1.setPrefSize(150, 10);
 		Button button2 = new Button("Return");
 		button2.setPrefSize(150, 10);
-		Button button3 = new Button("Easy");
-		button3.setPrefSize(150, 10);
-		Button button4 = new Button("Hard");
-		button4.setPrefSize(150, 10);
 		
 		
-		button3.setOnAction(e-> 
-		{
-			if (e.getSource() == button3)
-			{
-				gc.setDifficulty(12);
-			}
-			
-		});
-		
-		/*-------------------------------------------------- */
-		button4.setOnAction(e-> 
-		{
-			if (e.getSource() == button4)
-			{
-				gc.setDifficulty(5);
-			}
-		});
 		/*-------------------------------------------------- */
 		/*-------------------------------------------------- */
 		VBox hbox2 = new VBox();
-		hbox2.getChildren().addAll(button1, button2, button3, button4);	
+		hbox2.getChildren().addAll(button1, button2);	
 		hbox2.setAlignment(Pos.BOTTOM_LEFT);
 		
 		HBox hbox = new HBox(10);
