@@ -1,6 +1,7 @@
 package view;
 
 import java.text.StringCharacterIterator;
+import java.util.ArrayList;
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.layout.HBox;
@@ -91,5 +92,45 @@ public class Board extends Parent
 	 */
 	public void setY(int y) {
 		this.y = y;
+	}
+	
+	public VBox createMultiBoard(ArrayList<String> coord)
+	{
+		
+		VBox rows2 = new VBox();
+		String alpha = "abcdefghij";
+		StringCharacterIterator itr =  new StringCharacterIterator(alpha);
+		char current;
+		current = itr.current();
+		
+		int d = 0;
+		for(int z = 0; z < 10; z++)
+		{
+			HBox row = new HBox();
+			for(int i = 0; i < 10; i++)
+			{
+				if(d == 10)
+				{
+					current = itr.next();
+					d = 0;
+				}
+				String cordinate = Character.toString(current) + d;
+			
+				Cell cell = new Cell(cordinate, z, i, this);
+				
+				for(String compare : coord)
+				{
+					if(compare.equals(cordinate))
+					{
+						cell.markShip(true);
+					}
+				}
+                row.getChildren().add(cell);	
+                d++;
+			}
+			rows2.getChildren().add(row);
+		}
+		getChildren().add(rows2);
+		return rows2;
 	}
 }
