@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 public class MultiPlayer implements Window
 {	
-	private boolean isServer = false;
+	private boolean isServer = true;
 	private TextArea messages = new TextArea();
 	private ArrayList <String> myCoordList = null;
 	private ArrayList <String> enemyCoordList = null;
@@ -40,7 +40,7 @@ public class MultiPlayer implements Window
 	
 	private Server createServer()
 	{
-		return new Server(55555,data -> 
+		return new Server(1234,data -> 
 		{
 			Platform.runLater(() -> {
 			messages.appendText(data.toString() + "\n");
@@ -49,7 +49,7 @@ public class MultiPlayer implements Window
 	}
 	
 	private Client createClient(){
-		return new Client("127.0.0.1",55555, data->
+		return new Client("localhost",55555, data->
 		{
 			Platform.runLater(()-> 
 			{

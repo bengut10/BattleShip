@@ -25,7 +25,7 @@ public abstract class Connection {
 
     public void send(Serializable data) throws Exception 
     {    	
-        connThread.out.writeObject(data);
+       connThread.out.writeObject(data);
     }
 
  
@@ -44,6 +44,7 @@ public abstract class Connection {
     @Override
     public void run() 
     {
+    	
         try (ServerSocket server = isServer() ? new ServerSocket(getPort()) : null;
                 Socket socket = isServer() ? server.accept() : new Socket(getIP(), getPort());
                 ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
@@ -74,7 +75,7 @@ public abstract class Connection {
         {
         	e.printStackTrace();
             onReceiveCallback.accept("Connection closed");
-        }
+        } 
     }
     }
 }
