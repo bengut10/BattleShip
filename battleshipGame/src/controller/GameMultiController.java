@@ -13,7 +13,6 @@ public class GameMultiController {
 		mp.StartGame();
 		multiPlayer.setMyCoordList(mp.getLocs());	
 		System.out.println(mp.getLocs().size());
-		
 	}
 	
 	

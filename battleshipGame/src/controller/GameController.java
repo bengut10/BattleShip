@@ -42,7 +42,6 @@ public class GameController
 		}
 	}
 	
-	
 	public void getLeaderBoard()
 	{
 		LeaderBoard leaderB = new LeaderBoard();

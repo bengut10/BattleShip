@@ -41,7 +41,8 @@ public abstract class Connection {
     private Socket socket;
     private ObjectOutputStream out;
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public void run() 
     {
         try (ServerSocket server = isServer() ? new ServerSocket(getPort()) : null;

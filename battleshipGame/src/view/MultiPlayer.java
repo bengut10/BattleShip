@@ -125,10 +125,7 @@ public class MultiPlayer implements Window
 		});
 		
 		hbox.getChildren().addAll(vbox2, vbox1);
-		
 		VBox chat = new VBox();
-		
-	
 		messages.setPrefHeight(180);
 		TextField input = new TextField();
 
@@ -151,14 +148,11 @@ public class MultiPlayer implements Window
 			}
 			});
 	
-		
 		chat.getChildren().addAll(input,messages,button);
 		chat.setAlignment(Pos.BOTTOM_CENTER);
-		
 		layout.setPadding(new Insets(20, 20, 20, 20));
 		layout.setCenter(hbox);
 		layout.setBottom(chat);
-
 		Scene scene = new Scene(layout, 750, 600);
 		window.setScene(scene);
 		window.show();

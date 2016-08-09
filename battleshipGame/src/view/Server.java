@@ -27,8 +27,4 @@ public class Server extends Connection {
     protected int getPort() {
         return port;
     }
-    
-    
-    
-    
 }

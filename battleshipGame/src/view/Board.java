@@ -96,7 +96,6 @@ public class Board extends Parent
 	
 	public VBox createMultiBoard(ArrayList<String> coord)
 	{
-		
 		VBox rows2 = new VBox();
 		String alpha = "abcdefghij";
 		StringCharacterIterator itr =  new StringCharacterIterator(alpha);

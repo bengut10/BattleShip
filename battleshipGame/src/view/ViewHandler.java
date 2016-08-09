@@ -11,8 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
-
-
 public class ViewHandler 
 {
 	public static String userName;
@@ -23,7 +21,6 @@ public class ViewHandler
 		Window openW = new MultiPlayer();
 		displayLogIn(title, openW);
 	}
-	
 	
 	public static void playSingle(String title) 
 	{

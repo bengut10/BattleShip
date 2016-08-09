@@ -3,7 +3,6 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import com.sun.javafx.geom.RoundRectangle2D;
 /**
  * Creates ship representation given by the classic game of Battle Ship. Each ship contains a name, a size, and its current locations on a game board. 
  * 

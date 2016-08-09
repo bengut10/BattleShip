@@ -15,6 +15,7 @@ public class SingleGame extends Game implements Serializable
 	private static final long serialVersionUID = 1L;
 	private ArrayList <Ship> playerListOfShips = new ArrayList<Ship>();   
 	private ArrayList <Ship> enemyListOfShips = new ArrayList <Ship>();
+	private ArrayList<String> sendThisCoords = new ArrayList<String>();
 	private Grid grid = new Grid();
 	private Random random = new Random();
 	private String alpha = "abcdefghij";
@@ -87,11 +88,19 @@ public class SingleGame extends Game implements Serializable
 		for (int i = 0; i<playerListOfShips.size(); i++)
 		{
 			ArrayList<String> playerLocation = grid.placeShipsOnGrid(playerListOfShips.get(i).getShipSize()); 
+			this.sendThisCoords.addAll((ArrayList<String>) playerLocation.clone());	
 			playerListOfShips.get(i).setLocationCells(playerLocation);
 			//System.out.println(playerListOfShips.get(i));
 		}
 		
 	} 
+	
+
+	public ArrayList<String> getLocs()
+	{
+		return this.sendThisCoords;
+	}
+	
 	/**
 	 * Compares the players guess with all of the coordinates of the enemy's ships and determines if the shot is a miss, a hit, or a sink and removes any
 	 * ships that have been sunk. Ends the game if all of the enemy's ships have been sunk.
@@ -149,12 +158,12 @@ public class SingleGame extends Game implements Serializable
 				playerListOfShips.remove(ship);
 				if(playerListOfShips.isEmpty())
 				{
-					System.out.println("43343");
 					endGame();
 				}
 				return true;
 			}
 		}
+		missedShot();
 		return false;
 	}
 	/**

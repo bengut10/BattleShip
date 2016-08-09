@@ -1,6 +1,5 @@
 package view;
 
-import java.io.File;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -8,8 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+
 import javafx.stage.Stage;
 
 public class MainWindow extends Application{
@@ -25,14 +23,6 @@ public class MainWindow extends Application{
 		{
 			e.consume();
 		});
-		
-		String musicFile = "battle.mp3";     // For example
-
-		Media sound = new Media(new File(musicFile).toURI().toString());
-		MediaPlayer mediaPlayer = new MediaPlayer(sound);
-		mediaPlayer.play();
-
-
 		
 		/*-------------------------------------------------- */
 		Button button1 = new Button("Single Game");
