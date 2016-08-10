@@ -1,6 +1,6 @@
-package view;
+package src.view;
 
-import controller.GameController;
+import src.controller.GameController;
 import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.layout.*;

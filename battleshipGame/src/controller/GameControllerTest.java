@@ -1,5 +1,5 @@
-package controller;
-
+package src.controller;
+/*
 import static org.junit.Assert.*;
 
 import org.junit.After;
@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import view.SinglePlayer;
+import src.view.SinglePlayer;
 
 public class GameControllerTest {
 	
@@ -38,4 +38,4 @@ public class GameControllerTest {
 		
 	}
 
-}
+} */

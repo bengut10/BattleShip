@@ -1,6 +1,6 @@
-package view;
+package src.view;
 
-import controller.GameController;
+import src.controller.GameController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

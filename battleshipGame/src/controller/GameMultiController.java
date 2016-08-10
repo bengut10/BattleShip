@@ -1,7 +1,7 @@
-package controller;
+package src.controller;
 
-import model.MultiGame;
-import view.MultiPlayer;
+import src.model.MultiGame;
+import src.view.MultiPlayer;
 
 public class GameMultiController {
 

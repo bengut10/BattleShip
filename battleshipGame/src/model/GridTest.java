@@ -1,5 +1,5 @@
-package model;
-
+package src.model;
+/*
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -16,4 +16,4 @@ public class GridTest {
 		fail("Not yet implemented");
 	}
 
-}
+} */

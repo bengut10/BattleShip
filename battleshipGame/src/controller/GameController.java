@@ -1,11 +1,11 @@
-package controller;
+package src.controller;
 
 import javafx.collections.FXCollections;
 import java.util.ArrayList;
-import view.SinglePlayer;
-import model.SingleGame;
-import model.LeaderBoard;
-import view.ViewHandler;
+import src.view.SinglePlayer;
+import src.model.SingleGame;
+import src.model.LeaderBoard;
+import src.view.ViewHandler;
 
 public class GameController
 {	

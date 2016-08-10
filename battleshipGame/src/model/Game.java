@@ -1,7 +1,7 @@
-package model;
+package src.model;
 
 import java.io.Serializable;
-import controller.GameController;
+import src.controller.GameController;
 
 public abstract class Game implements Serializable
 {

@@ -1,8 +1,8 @@
-package view;
+package src.view;
 
 
 import java.util.ArrayList;
-import controller.GameMultiController;
+import src.controller.GameMultiController;
 
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -16,7 +16,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class MultiPlayer implements Window
+/**
+ * This class handles the multiplayer game mode
+ * @author thanvas
+ *
+ */
+ class MultiPlayer implements Window
 {	
 	private boolean isServer = true;
 	private TextArea messages = new TextArea();
@@ -26,6 +31,11 @@ public class MultiPlayer implements Window
 	static Boolean ready = false;
 	private Button button = new Button("StartGame");
 	
+	/**
+	 * The constructor starts a new network connection that is either client or server
+	 *
+	 */
+	public
 	MultiPlayer() 
 	{
 		try 
@@ -38,9 +48,15 @@ public class MultiPlayer implements Window
 		}
 	}
 	
+	/**
+	 * This function creates a new server with a specific port number
+	 * 
+	 * @return Server create a server object with a port number 55555 
+	 *
+	 */
 	private Server createServer()
 	{
-		return new Server(1234,data -> 
+		return new Server(55555,data -> 
 		{
 			Platform.runLater(() -> {
 			messages.appendText(data.toString() + "\n");
@@ -48,6 +64,12 @@ public class MultiPlayer implements Window
 		});
 	}
 	
+	/**
+	 * This function creates a new client with a specific port number and ip address
+	 * 
+	 * @return Client returns a new client with the specific port number and ip address
+	 *
+	 */
 	private Client createClient(){
 		return new Client("localhost",55555, data->
 		{
@@ -59,13 +81,24 @@ public class MultiPlayer implements Window
 		});
 	}
 
+	/**
+	 * This function set my coordinates 
+	 * 
+	 * @param myCoordList the myCoordList are passed in
+	 *
+	 */
 	public void setMyCoordList(ArrayList <String> myCoordList)
 	{
 		this.myCoordList = myCoordList;
 	}
 	
 	
-	
+	/**
+	 *This function displays the multiplayer menu
+	 *
+	 *@param title is the name of the window
+	 *
+	 */
 	@Override
 	public void displayWindow(String title) 
 	{
